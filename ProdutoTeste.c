@@ -36,18 +36,23 @@ int *gerador_vetor_resp(int ROWS)
     int *vetor = (int *)calloc(ROWS, sizeof(int));
     return vetor;
 }
+
 int main(int argc, char *argv[])
 {
-    if (argc < 3) {
-    printf("Usage: ./program ROWS COLS inverso\n");
+    if (argc < 2) {
+    printf("Usage: ./program max inverso\n");
     return 1;
 }
+    
+    int max = atoi(argv[1]);
+    int inverso = atoi(argv[2]);
+
+    for(int i=1; i <= max; i+=10){
     FILE *fp;
     fp = fopen("dados.csv", "a");
-
-    int ROWS = atoi(argv[1]);
-    int COLS = atoi(argv[2]);
-    int inverso = atoi(argv[3]);
+ 
+    int ROWS = i;
+    int COLS = i;
     int **A = gerador_matriz(ROWS,COLS);
     int *x = gerador_vetor(COLS);
     int *b = gerador_vetor_resp(ROWS);
@@ -74,7 +79,7 @@ int main(int argc, char *argv[])
     elapsed_time = (double) (end_time - start_time) / CLOCKS_PER_SEC;
 
     // printf("Tempo de execução: %.2f segundos.\n", elapsed_time);
-    fprintf(fp, "%i;%i;%.5f\n;%i", ROWS, COLS, elapsed_time,inverso); // escreve as variáveis no arquivo
+    fprintf(fp, "%i;%i;%.5f;%i\n", ROWS, COLS, elapsed_time,inverso); // escreve as variáveis no arquivo
     fclose(fp); // fecha o arquivo
 
     // Liberando a memória alocada para a matriz
@@ -83,6 +88,7 @@ int main(int argc, char *argv[])
     }
     free(A);
     free(x);
+    }
     return 0;
 }
 
