@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     int max = atoi(argv[1]);
     int inverso = atoi(argv[2]);
 
-    for(int i=1; i <= max; i+=10){
+    for(int i=1; i <= max; i+=100){
     FILE *fp;
     fp = fopen("dados.csv", "a");
  
@@ -69,17 +69,18 @@ int main(int argc, char *argv[])
         }
     }
     }else{
-    for (int i = 0; i < COLS; i++) {
-        for (int j = 0; j < ROWS; j++) {
+    for (int j = 0; j < COLS; j++) {
+        for (int i = 0; i < ROWS; i++) {
             b[i] += A[i][j] * x[j];
         }
     }
     }
+    
     end_time = clock();
     elapsed_time = (double) (end_time - start_time) / CLOCKS_PER_SEC;
 
     // printf("Tempo de execução: %.2f segundos.\n", elapsed_time);
-    fprintf(fp, "%i;%i;%.5f;%i\n", ROWS, COLS, elapsed_time,inverso); // escreve as variáveis no arquivo
+    fprintf(fp, "%i;%.9f;%i\n", COLS, elapsed_time,inverso); // escreve as variáveis no arquivo
     fclose(fp); // fecha o arquivo
 
     // Liberando a memória alocada para a matriz

@@ -44,8 +44,8 @@ PROGRAM matriz_vetor_multiplication
             end do
         end do
     ELSE
-        do i = 1, COLS
-            do j = 1, ROWS
+        do j = 1, COLS
+            do i = 1, ROWS
                 b(i) = b(i) + A(i,j) * x(j)
             end do
         end do
